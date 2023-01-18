@@ -10,6 +10,7 @@ We took a Bayesian approach to modeling the interactions between race, income, g
 
 1. Data processing
   - Using Google Earth Engine to calculate land surface temperature (LST) and fractional vegetation (Fr) for each census tract
+  - Merging datasets and calculating summary measures for each census tract
 
 
 
