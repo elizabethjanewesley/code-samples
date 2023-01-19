@@ -14,13 +14,13 @@ We took a Bayesian approach to modeling the interactions between race, income, g
   - [Merging datasets and calculating summary measures](spatial-diss/data_merge.R) for each census tract
 
 2. Models
-  - Running Bayesian models, including specifying priors for the parameters
+  - Running and saving [Bayesian models](spatial-diss/models.R), including specifying priors for the parameters
   
 3. Plots
-  - Data visualization including mapping spatial variation and evaluating model output
+  - [Data visualization](spatial-diss/plots.R) including mapping spatial variation and evaluating model output
 
 4. Tables
-  - Creating LaTeX tables
+  - Creating publication-ready [LaTeX tables](spatial-diss/tables.R)
 
 
 
