@@ -54,8 +54,8 @@ tracts <- tracts %>%
   left_join(pm2.5) %>% 
   drop_na() %>% 
   # Categorize each independent variable into quintiles
-  mutate(pov.quintile = ntile(pct.under.2.00, 5),
-         pov.quintile = as_factor(pov.quintile),
+  mutate(pov.q = ntile(pct.under.2.00, 5),
+         pov.q = as_factor(pov.q),
          pm.q = as_factor(ntile(pm25.mean, 5)),
          race.q = ntile(pct_nonwht, 5),
          race.q = as_factor(race.q),
@@ -63,6 +63,9 @@ tracts <- tracts %>%
          Fr.q = as_factor(Fr.q),
          lst.q = ntile(lst, 5),
          lst.q = as_factor(lst.q))
+
+# Save full dataset
+write_sf(tracts, here("data", "full-data.shp"))
 
 
 
