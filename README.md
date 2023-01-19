@@ -9,7 +9,7 @@ This repository contains samples of code used for my PhD and Master's research. 
 We took a Bayesian approach to modeling the interactions between race, income, greenspace, and PM<sub>2.5</sub>. Code samples include:
 
 1. Data processing
-  - Using Google Earth Engine to calculate [land surface temperature (LST)](spatial-diss/daily_LST_tracts.R) and fractional vegetation (Fr) for each census tract
+  - Using Google Earth Engine to calculate [land surface temperature (LST)](spatial-diss/daily_LST_tracts.R) and [fractional vegetation (Fr)](spatial-diss/daily_Fr_tracts.R) for each census tract
   - Merging datasets and calculating summary measures for each census tract
 
 2. Models
