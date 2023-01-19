@@ -10,12 +10,8 @@ library(patchwork)
 # Load full dataset
 full.data <- st_read(here("data", "full-data.shp"))
 
-# Load models
-mod.1 <- read_rds(here("models", "mod-1.rds"))
-mod.2 <- read_rds(here("models", "mod-2.rds"))
-mod.3 <- read_rds(here("models", "mod-3.rds"))
+# Load full model
 mod.4 <- read_rds(here("models", "mod-4.rds"))
-mod.5 <- read_rds(here("models", "mod-5.rds"))
 
 
 # Spatial distribution of variables ----------------------------------
@@ -235,7 +231,7 @@ race.labels <- as_labeller(c('1' = "Prop. non-white Q1",
 
 # Plot the effects of the interaction between Fr and PM2.5
 # conditional on census tract economic status
-fr.pm.pov <- plot(conditional_effects(mod.7c, 
+fr.pm.pov <- plot(conditional_effects(mod.4, 
                                       conditions = conditions.pov, 
                                       effects = "Fr:pm.q",
                                       prob = 0.89),
@@ -251,7 +247,7 @@ fr.pm.pov <- plot(conditional_effects(mod.7c,
 
 # Plot the effects of PM2.5
 # conditional on census tract economic status
-pm.pov <- plot(conditional_effects(mod.7c, 
+pm.pov <- plot(conditional_effects(mod.4, 
                                    conditions = conditions.pov, 
                                    effects = "pm.q",
                                    prob = 0.89),
@@ -267,7 +263,7 @@ pm.pov <- plot(conditional_effects(mod.7c,
 
 # Plot the effects of the interaction between Fr and PM2.5
 # conditional on census tract racial composition
-fr.pm.race <- plot(conditional_effects(mod.7c, 
+fr.pm.race <- plot(conditional_effects(mod.4, 
                                        conditions = conditions.race, 
                                        effects = "Fr:pm.q",
                                        prob = 0.89),
@@ -284,7 +280,7 @@ fr.pm.race <- plot(conditional_effects(mod.7c,
 
 # Plot the effects of PM2.5
 # conditional on census tract racial composition
-pm.race <- plot(conditional_effects(mod.7c, 
+pm.race <- plot(conditional_effects(mod.4, 
                                     conditions = conditions.race, 
                                     effects = "pm.q",
                                     prob = 0.89),
@@ -322,20 +318,20 @@ ggsave(here("plots", "cond-effects-race.pdf"),
 # Posterior distributions of estimated coefficients -------------------------------------------------
 
 # Extract the estimates for the coefficients from every draw
-posterior.5 <- exp(as.matrix(mod.5))[, 2:15]
+posterior.4 <- exp(as.matrix(mod.4))[, 2:15]
 
 # Set plot title
 plot_title <- ggtitle("Posterior distributions",
                      "with medians and 89% intervals")
 
 # Get column names for coefficients
-x <- colnames(posterior.5)
+x <- colnames(posterior.4)
 
 # Set color scheme for plot
 colors <- c("#EE9B67", "#EE9B67", "#001959", "#001959", "#1C5460", "#1C5460")
 color_scheme_set(colors)
 
-mcmc_areas(posterior.5,
+mcmc_areas(posterior.4,
                  prob = 0.89,
                  area_method = "scaled height") + 
   plot_title +
@@ -375,18 +371,18 @@ ggsave(here("plots", "post-dist.pdf"),
 y <- full.data$n
 
 # Distribution of the outcome from the specified model
-yrep.5 <- posterior_predict(mod.5)
+yrep.4 <- posterior_predict(mod.4)
 
 # Subset a sample of 100 draws from the model
-samp100 <- sample(nrow(yrep.5), 100)
+samp100 <- sample(nrow(yrep.4), 100)
 
 # Overly posterior predictions with observations to see how the distributions align
-ppdens.5 <- ppc_dens_overlay(y, yrep.5[samp100, ]) +
+ppdens.4 <- ppc_dens_overlay(y, yrep.4[samp100, ]) +
   xlim(0, 600) +
   labs(x = "Asthma count", y = "Density")
 
 # Add annotation to plot with model specification
-ppdens.5 + plot_annotation(title = expression("Poverty + Race + Fr + PM"[2.5]*" Q + Fr x PM"[2.5]*" Q"))
+ppdens.4 + plot_annotation(title = expression("Poverty + Race + Fr + PM"[2.5]*" Q + Fr x PM"[2.5]*" Q"))
 
 # Save plot
 ggsave(here("plots", "pp-checks.pdf"), 
@@ -400,9 +396,9 @@ ggsave(here("plots", "pp-checks.pdf"),
 # Map the difference between the predicted counts and the observed counts
 
 # Summarize the predicted counts per tract
-mod.5.pred <- full.data %>% 
+mod.4.pred <- full.data %>% 
   # add predictions to dataset
-  add_predicted_draws(mod.5) %>% 
+  add_predicted_draws(mod.4) %>% 
   # Group by census tract and calculate summary stats for predicted cases
   group_by(geoid) %>% 
   summarise(n = first(n),
@@ -413,7 +409,7 @@ mod.5.pred <- full.data %>%
 
 # Join summaries to dataset
 tracts.pred <- tracts %>% 
-  right_join(mod.7c.pred)
+  right_join(mod.4.pred)
 
 # Percent difference between observed and predicted
 tracts.pred <- tracts.pred %>% 
@@ -430,7 +426,7 @@ map.diff <- ggplot(tracts.pred) +
 
 # Scatterplot of obs vs pred 
 
-scat.plot <- ggplot(mod.7c.pred, aes(x = n, y = mean.pred)) +
+scat.plot <- ggplot(mod.4.pred, aes(x = n, y = mean.pred)) +
   geom_point(color = "#001959") +
   geom_abline(intercept = 0, slope = 1, color = "#808133") +
   labs(x = "Observed cases",
