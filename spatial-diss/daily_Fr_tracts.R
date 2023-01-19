@@ -10,7 +10,7 @@ library(rgee)
 library(here)
 
 # Load census tracts
-tracts <- read_sf(here("data", "tracts.shp"))
+tracts <- read_sf(here("data", "tracts_geo.shp"))
 
 # Define the data product and bands to be used in GEE
 # Terra Surface Reflectance Daily Global 250m

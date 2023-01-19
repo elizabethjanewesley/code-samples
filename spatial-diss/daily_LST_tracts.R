@@ -8,7 +8,7 @@ library(rgee)
 library(here)
 
 # Load census tracts
-tracts <- read_sf(here("data", "tracts.shp"))
+tracts <- read_sf(here("data", "tracts_geo.shp"))
 
 # Define the data product and band to be used in GEE
 # MOD11A1.006 Terra Land Surface Temperature and Emissivity Daily Global 1km
