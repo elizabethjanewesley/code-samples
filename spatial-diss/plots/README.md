@@ -12,4 +12,6 @@ These scripts produce data visualizations, including descriptive plots, mapping 
 | <a href="Fig-2.R"><img src="Figure-2.png"></a> | <a href="Fig-3.R"><img src="Figure-3.png"></a> |
 | <a href="Fig-5-6.R"><img src="Figure-6.png"></a> | <a href="Fig-5-6.R"><img src="Figure-5.png"></a> |
 | <a href="Fig-4.R"><img src="Figure-4.png"></a> | <a href="Fig-7.R"><img src="Figure-7.png"></a> |
-| <a href="Fig-8.R"><img src="Figure-8.png"></a> |  
+| <a href="Fig-8.R"><img src="Figure-8.png"></a> | |
+
+
