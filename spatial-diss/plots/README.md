@@ -8,6 +8,7 @@ These scripts produce data visualizations, including descriptive plots, mapping 
 - `patchwork` for combining separate ggplots
 - `sf` for working with spatial vector data
 - `here` for easy file referencing
+- and of course, `ggplot` and the `tidyverse`
 
 ## Click on an image to see the code that produced the data visualization.
 
