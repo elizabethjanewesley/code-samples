@@ -5,4 +5,6 @@ These scripts produce data visualizations, including descriptive plots, mapping 
 - `tidybayes` for incorporating Bayesian models in a tidydata workflow
 - `patchwork` for combining separate ggplots
 
-![](spatial-diss/plots/Figure-2.png)
+<a href="Fig-2.R">
+    <img src="Figure-2.png" width = "50%">
+</a>
