@@ -16,8 +16,8 @@ We took a Bayesian approach to modeling the interactions between race, income, g
 2. Models:
   - Running and saving [Bayesian models](spatial-diss/models.R), including specifying priors for the parameters
   
-3. Plots:
-  - [Data visualization](spatial-diss/plots.R) including mapping spatial variation and evaluating model output
+3. Data visualization:
+  - [Data visualization](spatial-diss/plots) including mapping spatial variation and evaluating model output
 
 4. Tables:
   - Creating publication-ready [LaTeX tables](spatial-diss/tables.R)
